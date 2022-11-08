@@ -1,4 +1,3 @@
-import unittest
 import math
 from calc import is_num
 from calc import to_list
@@ -9,12 +8,13 @@ from calc import calc
 
 
 def test_is_num():
-    assert is_num("300") == True
-    assert is_num("?") == False
+    assert is_num("300")
+    assert not is_num("?")
 
 
 def test_to_list():
     assert to_list("50*7-3") == [50, '*', 7, '-', 3]
+    assert to_list("50 - 7 * 3") == [50, '-', 7, '*', 3]
 
 
 def test_func():
@@ -28,9 +28,9 @@ def test_operator():
 
 
 def test_find_bracket():
-    assert find_bracket(0,['(', 5.0, '*', 6.0, '+', '(', 2.0, '+', 1.0, ')', ')'])==10.0
+    assert find_bracket(0, ['(', 5.0, '*', 6.0, '+', '(', 2.0, '+', 1.0, ')', ')']) == 10.0
 
 
 def test_calc():
     result = to_list('3+5*exp(4.2)/(5+7)')
-    assert round(calc(result),3)==30.786
+    assert round(calc(result), 3) == 30.786
