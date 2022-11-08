@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Calculator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    </head>
+    <body style="background-color: darkseagreen">
+        <div class="ui grid" style="height: 150px; background-color: darkseagreen; border-style: unset"></div>
+        <div class="ui sizer segment" style="width: 600px; height: 700px; text-align: left; margin: auto; background-color: bisque; border-radius: 50px;">
+            <div class="ui huge header brown">
+                Calculator
+            </div>
+            <div class="ui larger header pink">
+                support: + - * / ^ exp() log()
+            </div>
+                <form method="POST" class="ui form">
+                    <div class="inline field">
+                        <div class="ui input">
+                            <input type="text" name="user_input" placeholder="type in math expression ..." style="border-radius: 100px; width: 450px;"/>
+                        </div>
+                        <button class="ui pink button" style="border-radius: 50px;"> calculate </button>
+                    </div>
+                </form>
+            <div class="ui header brown">
+                <h1> Result </h1>
+            </div>
+            <div class="ui attached attached message" style="height: 180px; border-radius: 30px;">
+                <P>{{ INPUT }}</P>
+                <div class="ui huge header green">
+                    {{ RESULT }}
+                </div>
+            </div>
+            <div class="ui header brown">
+                <h1> Error message </h1>
+            </div>
+            <div class="ui attached attached error message" style="height: 180px; border-radius: 30px;">
+                <div class="ui larger header red">
+                    {{ ERROR }}
+                </div>
+            </div>
+        </div>  
+    </body>
+</html>

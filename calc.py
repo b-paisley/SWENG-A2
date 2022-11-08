@@ -24,10 +24,9 @@ def to_list(a: str) -> list:
     :type a: str
     :return: A list of the numbers and operators in the string
     """
-    a = a.strip()
-    a.replace(' ', '')
+    str_local = a.replace(" ","")
     rst = []
-    for matches in re.finditer(r"[+\-*^/()]|(exp)|(log)|(\d*\.?\d+)|.", a):
+    for matches in re.finditer(r"[+\-*^/()]|(exp)|(log)|(\d*\.?\d+)|.", str_local):
         if matches:
             item = matches[0]
             if not is_num(item) and item not in operators:
@@ -100,6 +99,8 @@ def operator(list_in: list, op1: str, op2: str):
 
         num1_idx = idx_op-1
         num2_idx = idx_op+1
+        if num1_idx < 0 or num2_idx >= len(list_local):
+            raise Exception(f'must have two nums for doing {op}')
         num1 = list_local[num1_idx]
         num2 = list_local[num2_idx]
         if type(num1) != float or type(num2) != float:
@@ -162,7 +163,7 @@ def calc(list_in: list):
         tail = list_local[end+1:]
         list_local = head + tail
     if ')' in list_local:
-        raise Exception('() is not balanced')
+        raise Exception('brackets are not closed')
     list_local = func(list_local, 'log')
     list_local = func(list_local, 'exp')
     list_local = operator(list_local, '^', '~')
@@ -173,6 +174,7 @@ def calc(list_in: list):
             return list_local[0]
         else:
             raise Exception("invalid input")
+
 
 
 if __name__ == "__main__":

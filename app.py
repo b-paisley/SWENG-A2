@@ -1,7 +1,9 @@
 from flask import Flask, request, render_template
 import calc
 
+
 app = Flask(__name__)
+
 
 def calc_exe(input_str: str):
     """
@@ -17,16 +19,18 @@ def calc_exe(input_str: str):
 
 @app.route('/', methods=['POST', 'GET'])
 def calculate():
-    result = " "
-    error = " "
+    str_in = ""
+    result = ""
+    error = ""
     if request.method == 'POST':
         try:
-            result = calc_exe(input_str=request.form.get('user_input'))
+            str_in = request.form.get('user_input')
+            result = str(calc_exe(str_in))
+            str_in += " = "
         except Exception as err:
             error = err
-
-    return render_template('tamplate.html', RESULT=result, ERROR=error)
+    return render_template('template.html', INPUT=str_in, RESULT=result, ERROR=error)
 
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=5000)
+    app.run(debug=True)
